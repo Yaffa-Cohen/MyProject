@@ -9,6 +9,7 @@ import './homePage.css';
 
 const HomePage = () => {
   const [currentPage, setCurrentPage] = useState('');
+  const [user,setUser] = useState(localStorage.getItem("user"));
   let history = useHistory();
 
   // function handleClick() {

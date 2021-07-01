@@ -5,14 +5,16 @@ import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
 import { ValidatorForm, TextValidator, validator } from 'react-material-ui-form-validator';
 import { useHistory } from 'react-router-dom';
-import connectToServer from '../../api/userApi';
-
+import login from '../../api/userApi';
+import signup from '../../api/userApiPost';
 
 const LogIn = () => {
 
     const [userName, setUserName] = useState();
     const [password, setPassword] = useState();
     const [UserDiv, setUserDiv] = useState(false);
+    const [address, setAddress] = useState();
+    const [email,setEmail] = useState();
 
     const [newUserDiv, setNewUserDiv] = useState(true);
     let history = useHistory();
@@ -37,9 +39,15 @@ const LogIn = () => {
         setUserDiv(true);
     }
 
-    function onClickButton(){
+    function loginButton(){
         history.push('./home');
-         connectToServer(userName,password);
+         login(userName,password);
+         
+    }
+
+    function signupButton(){
+       history.push('/home');
+       signup(userName,password,address,email);
     }
 
     ValidatorForm.addValidationRule('isPhone', value => validator.isMobilePhone(value));
@@ -54,7 +62,7 @@ const LogIn = () => {
             <br /><br />
             <TextField id="standard-basic password" label="Password" variant="outlined" onChange={e=>setPassword(e.target.value)}/>
             <br /> <br />
-            <Button onClick={onClickButton} variant="contained" size="medium">כניסה למערכת </Button>
+            <Button onClick={loginButton} variant="contained" size="medium">כניסה למערכת </Button>
             {/* <Button onClick={handleSubmit} variant="contained" size="medium">כניסה למערכת </Button> */}
 
             <br /><br />
@@ -74,16 +82,17 @@ const LogIn = () => {
         <div className="NewUser" hidden={newUserDiv}>
             משתמש חדש
             <br /><br />
-            <TextField id="standard-basic" label="User Name" variant="outlined" />
+            <TextField id="standard-basic" label="User Name" variant="outlined" onChange={e=>setUserName(e.target.value)}/>
             <br /><br />
-            <TextField id="standard-basic" label="Password" variant="outlined" />
+            <TextField id="standard-basic" label="Password" variant="outlined" onChange={e=>setPassword(e.target.value)}/>
             <br /> <br />
-            <TextField id="standard-basic" label="Address" variant="outlined" />
+            <TextField id="standard-basic" label="Address" variant="outlined" onChange={e=>setAddress(e.target.value) }/>
             <br /><br />
-            <TextField id="standard-basic" label="E-mail" variant="outlined" />
+            <TextField id="standard-basic" label="E-mail" variant="outlined" onChange={e=>setEmail(e.target.value) }/>
             <br /> <br />
             {/* <Button onClick={handleSubmit} variant="contained" size="medium">כניסה למערכת </Button> */}
-            <Button onClick={()=>{history.push('home')}} variant="contained" size="medium">כניסה למערכת </Button>
+             <Button onClick={signupButton} variant="contained" size="medium">כניסה למערכת </Button>
+            {/* <Button onClick={()=>{history.push('home')}} variant="contained" size="medium">כניסה למערכת </Button> */}
 
         </div>
 

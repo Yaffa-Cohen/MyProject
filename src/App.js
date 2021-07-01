@@ -12,15 +12,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() 
 {
-  // function goToServer(){
-  //   fetch("http://localhost:3000/login?user=user1")
-  //   .then((res) => res.json())
-  //   .then((data) => console.log(data))
-  //   .catch((err) => {
-  //     console.log("error", err);
-  //   });
-  // }
-
+  
   return (
     <div className="App">
       {/* <Header/> */}
