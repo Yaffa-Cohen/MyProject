@@ -7,6 +7,7 @@ import LogIn from './component/Home/logIn'
 import Events from './component/Events/events';
 import Sales from './component/Sales/sales';
 import SearchBabySitter from './component/BabySitter/searchBabySitter';
+import InsertProduct from './component/Sales/productToInsert';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // import Header from './component/header';
 
@@ -41,6 +42,9 @@ function App()
           </Route>
           <Route path='/babySitterForm'>
             <BabySitterForm />
+          </Route>
+          <Route path='/insertProduct'>
+            <InsertProduct />
           </Route>
         </Switch>
       </Router>

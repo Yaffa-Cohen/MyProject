@@ -1,7 +1,7 @@
 
 
 const signup=(userName, password, address, email)=>{
-    return fetch('http://localhost:3000/signup',
+    return fetch('http://localhost:3000/user',
     {
         method:'POST',
         headers:{

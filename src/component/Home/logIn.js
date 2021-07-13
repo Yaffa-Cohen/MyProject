@@ -5,7 +5,8 @@ import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
 import { ValidatorForm, TextValidator, validator } from 'react-material-ui-form-validator';
 import { useHistory } from 'react-router-dom';
-import login from '../../api/userApi';
+// import {login} from '../../api/userApi';
+import loginAPI from '../../api/userApi';
 import signup from '../../api/userApiPost';
 
 const LogIn = () => {
@@ -14,7 +15,7 @@ const LogIn = () => {
     const [password, setPassword] = useState();
     const [UserDiv, setUserDiv] = useState(false);
     const [address, setAddress] = useState();
-    const [email,setEmail] = useState();
+    const [email, setEmail] = useState();
 
     const [newUserDiv, setNewUserDiv] = useState(true);
     let history = useHistory();
@@ -39,15 +40,19 @@ const LogIn = () => {
         setUserDiv(true);
     }
 
-    function loginButton(){
-        history.push('./home');
-         login(userName,password);
-         
+
+
+    const loginButton = async () =>{
+        let res1  = await loginAPI(userName,password);
+        if(res1){
+            history.push('/home');
+            alert('hi');
+        }
     }
 
-    function signupButton(){
-       history.push('/home');
-       signup(userName,password,address,email);
+    function signupButton() {
+        history.push('/home');
+        signup(userName, password, address, email);
     }
 
     ValidatorForm.addValidationRule('isPhone', value => validator.isMobilePhone(value));
@@ -58,12 +63,11 @@ const LogIn = () => {
 
         <div className="existUser" hidden={UserDiv}>
             משתמש קיים <br /> <br />
-            <TextField id="standard-basic userName" label="User Name" variant="outlined" onChange={e=>setUserName(e.target.value)}/>
+            <TextField id="standard-basic userName" label="User Name" variant="outlined" onChange={e => setUserName(e.target.value)} />
             <br /><br />
-            <TextField id="standard-basic password" label="Password" variant="outlined" onChange={e=>setPassword(e.target.value)}/>
+            <TextField id="standard-basic password" label="Password" variant="outlined" onChange={e => setPassword(e.target.value)} />
             <br /> <br />
             <Button onClick={loginButton} variant="contained" size="medium">כניסה למערכת </Button>
-            {/* <Button onClick={handleSubmit} variant="contained" size="medium">כניסה למערכת </Button> */}
 
             <br /><br />
             <Button onClick={showNewDiv} variant="contained" size="medium">משתמש חדש</Button>
@@ -82,16 +86,16 @@ const LogIn = () => {
         <div className="NewUser" hidden={newUserDiv}>
             משתמש חדש
             <br /><br />
-            <TextField id="standard-basic" label="User Name" variant="outlined" onChange={e=>setUserName(e.target.value)}/>
+            <TextField id="standard-basic" label="User Name" variant="outlined" onChange={e => setUserName(e.target.value)} />
             <br /><br />
-            <TextField id="standard-basic" label="Password" variant="outlined" onChange={e=>setPassword(e.target.value)}/>
+            <TextField id="standard-basic" label="Password" variant="outlined" onChange={e => setPassword(e.target.value)} />
             <br /> <br />
-            <TextField id="standard-basic" label="Address" variant="outlined" onChange={e=>setAddress(e.target.value) }/>
+            <TextField id="standard-basic" label="Address" variant="outlined" onChange={e => setAddress(e.target.value)} />
             <br /><br />
-            <TextField id="standard-basic" label="E-mail" variant="outlined" onChange={e=>setEmail(e.target.value) }/>
+            <TextField id="standard-basic" label="E-mail" variant="outlined" onChange={e => setEmail(e.target.value)} />
             <br /> <br />
             {/* <Button onClick={handleSubmit} variant="contained" size="medium">כניסה למערכת </Button> */}
-             <Button onClick={signupButton} variant="contained" size="medium">כניסה למערכת </Button>
+            <Button onClick={signupButton} variant="contained" size="medium">כניסה למערכת </Button>
             {/* <Button onClick={()=>{history.push('home')}} variant="contained" size="medium">כניסה למערכת </Button> */}
 
         </div>

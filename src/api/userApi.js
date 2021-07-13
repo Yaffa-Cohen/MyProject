@@ -5,12 +5,14 @@ import React, { useState } from 'react';
 
 
 
-const login = async (userName, password) => {
-  const res = await fetch(`http://localhost:3000/login?user_id=${userName}&user_password=${password}`, {
+const loginAPI = async (userName, password) => {
+
+  const res = await fetch(`http://localhost:3000/user/?user_name=${userName}&user_password=${password}`, {
     method: "GET",
     mode: "cors",
   })
   const data = await res.json()
+console.log(data);
   return data
   // fetch(`http://localhost:3001/login?user=${userName}&password=${password}`)
 
@@ -22,4 +24,4 @@ const login = async (userName, password) => {
 
 }
 
-export default login;
+export default loginAPI;
